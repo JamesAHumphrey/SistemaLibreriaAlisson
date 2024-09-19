@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_sale', function (Blueprint $table) {
-            
             $table->increments('id');
             $table->decimal('purchase_price',10,2);
             $table->integer('amount');

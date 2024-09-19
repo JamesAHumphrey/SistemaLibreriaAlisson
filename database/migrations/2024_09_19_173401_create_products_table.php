@@ -30,6 +30,9 @@ return new class extends Migration
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
 
+            $table->integer('brand_id')->unsigned();
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade')->onUpdate('cascade');
+
             $table->integer('unit_id')->unsigned();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
