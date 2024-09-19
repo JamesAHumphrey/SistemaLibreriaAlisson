@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovementController;
@@ -40,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('product-purchases', ProductPurchaseController::class);
     Route::resource('sales', SaleController::class);
     Route::resource('product-sales', ProductSaleController::class);
-    
+    Route::resource('brands', BrandController::class);
 });
 
 

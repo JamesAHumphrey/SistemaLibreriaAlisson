@@ -40,7 +40,7 @@ class Product extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'description', 'retail_price', 'wholesale_price', 'current_stock', 'current_total', 'current_unit_price', 'minimum_stocks', 'code', 'category_id', 'unit_id'];
+    protected $fillable = ['name', 'description', 'retail_price', 'wholesale_price', 'current_stock', 'current_total', 'current_unit_price', 'minimum_stocks', 'code', 'category_id', 'unit_id', 'brand_id'];
 
 
     /**
@@ -57,6 +57,14 @@ class Product extends Model
     public function unit()
     {
         return $this->belongsTo(\App\Models\Unit::class, 'unit_id', 'id');
+    }
+
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand()
+    {
+        return $this->belongsTo(\App\Models\Brand::class, 'brand_id', 'id');
     }
     
     /**
@@ -82,5 +90,7 @@ class Product extends Model
     {
         return $this->hasMany(\App\Models\ProductSale::class, 'id', 'product_id');
     }
+
+
     
 }

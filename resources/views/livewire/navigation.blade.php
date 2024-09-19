@@ -64,6 +64,13 @@
             </a>
         </li>
 
+        <li class="nav-item {{ Request::route()->named('brands.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('brands.index') ? 'active' : '' }}"
+                href="{{ route('brands.index') }}" wire:navigate>
+                <i class="fas fa-th-large text-blue"></i> Marcas    
+            </a>
+        </li>
+
         <li class="nav-item {{ Request::route()->named('providers.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('providers.index') ? 'active' : '' }}"
                 href="{{ route('providers.index') }}" wire:navigate>
