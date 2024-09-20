@@ -1,29 +1,28 @@
-@extends('layouts.app')
-
-@section('template_title')
-    {{ __('Update') }} Product
-@endsection
+@extends('layouts.panel')
+@section('title', 'Product/Update')
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="">
-            <div class="col-md-12">
-
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Product</span>
+    <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Actualizar Producto</h3>
                     </div>
-                    <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('products.update', $product->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            @csrf
-
-                            @include('product.form')
-
-                        </form>
+                    <div class="col-4 text-right">
+                        <a href="{{ route('products.index') }}" class="btn btn-sm btn-primary"><i
+                                class="fas fa-arrow-left"></i>
+                            Volver</a>
                     </div>
                 </div>
             </div>
+            <div class="card-body container-fluid">
+                <form action="{{ route('products.update', $product) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    @include('product.form')
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
 @endsection

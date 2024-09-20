@@ -60,14 +60,21 @@
         <li class="nav-item {{ Request::route()->named('units.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('units.index') ? 'active' : '' }}"
                 href="{{ route('units.index') }}" wire:navigate>
-                <i class="fas fa-box text-blue"></i> Unidades    
+                <i class="fas fa-th text-blue"></i> Unidades    
             </a>
         </li>
 
         <li class="nav-item {{ Request::route()->named('brands.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('brands.index') ? 'active' : '' }}"
                 href="{{ route('brands.index') }}" wire:navigate>
-                <i class="fas fa-th-large text-blue"></i> Marcas    
+                <i class="fas fa-th-list text-blue"></i> Marcas    
+            </a>
+        </li>
+
+        <li class="nav-item {{ Request::route()->named('products.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('products.index') ? 'active' : '' }}"
+                href="{{ route('products.index') }}" wire:navigate>
+                <i class="fas fa-box text-blue"></i> Productos    
             </a>
         </li>
 

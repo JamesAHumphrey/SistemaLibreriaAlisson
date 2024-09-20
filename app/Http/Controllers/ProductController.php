@@ -6,6 +6,9 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -27,8 +30,10 @@ class ProductController extends Controller
     public function create(): View
     {
         $product = new Product();
-
-        return view('product.create', compact('product'));
+        $units = Unit::all();
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('product.create', compact('product','units','categories','brands'));
     }
 
     /**
@@ -57,8 +62,11 @@ class ProductController extends Controller
     public function edit($id): View
     {
         $product = Product::find($id);
+        $units = Unit::all();
+        $categories = Category::all();
+        $brands = Brand::all();
 
-        return view('product.edit', compact('product'));
+        return view('product.edit', compact('product','units','categories','brands'));
     }
 
     /**
