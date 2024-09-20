@@ -37,7 +37,7 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request): RedirectResponse
     {
         Employee::create($request->validated());
-        return Redirect::route('employees.index')->with('success', 'Empleado creado de manera exitosa..');
+        return Redirect::route('employees.index')->with('success', 'Empleado creado de manera exitosa.');
     }
 
     /**

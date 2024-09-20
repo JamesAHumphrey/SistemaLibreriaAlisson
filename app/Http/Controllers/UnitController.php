@@ -38,7 +38,7 @@ class UnitController extends Controller
     {
         Unit::create($request->validated());
 
-        return Redirect::route('units.index')->with('success', 'Unidad creada de manera exitosa..');
+        return Redirect::route('units.index')->with('success', 'Unidad creada de manera exitosa.');
     }
 
     /**

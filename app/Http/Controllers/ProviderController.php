@@ -38,7 +38,7 @@ class ProviderController extends Controller
     {
         Provider::create($request->validated());
 
-        return Redirect::route('providers.index')->with('success', 'Proveedor creado de manera exitosa..');
+        return Redirect::route('providers.index')->with('success', 'Proveedor creado de manera exitosa.');
     }
 
     /**

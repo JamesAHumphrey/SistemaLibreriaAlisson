@@ -79,6 +79,6 @@ class BrandController extends Controller
         Brand::find($id)->delete();
 
         return Redirect::route('brands.index')
-            ->with('success', 'Marca elimanda de manera exitosa.');
+            ->with('success', 'Marca eliminanda de manera exitosa.');
     }
 }

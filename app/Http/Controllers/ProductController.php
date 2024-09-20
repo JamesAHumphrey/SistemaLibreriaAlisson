@@ -76,13 +76,13 @@ class ProductController extends Controller
     {
         $product->update($request->validated());
 
-        return Redirect::route('products.index')->with('success', 'Producto actualizado de manera exitosa');
+        return Redirect::route('products.index')->with('success', 'Producto actualizado de manera exitosa.');
     }
 
     public function destroy($id): RedirectResponse
     {
         Product::find($id)->delete();
 
-        return Redirect::route('products.index')->with('success', 'Producto eliminado de manera exitosa');
+        return Redirect::route('products.index')->with('success', 'Producto eliminado de manera exitosa.');
     }
 }
