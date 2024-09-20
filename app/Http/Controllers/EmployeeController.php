@@ -37,7 +37,7 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request): RedirectResponse
     {
         Employee::create($request->validated());
-        return Redirect::route('employees.index')->with('success', 'Employee created successfully.');
+        return Redirect::route('employees.index')->with('success', 'Empleado creado de manera exitosa..');
     }
 
     /**
@@ -65,12 +65,12 @@ class EmployeeController extends Controller
     public function update(EmployeeRequest $request, Employee $employee): RedirectResponse
     {
         $employee->update($request->validated());
-        return Redirect::route('employees.index')->with('success', 'Employee updated successfully');
+        return Redirect::route('employees.index')->with('success', 'Empleado actualizado de manera exitosa.');
     }
 
     public function destroy($id): RedirectResponse
     {
         Employee::find($id)->delete();
-        return Redirect::route('employees.index')->with('success', 'Employee deleted successfully');
+        return Redirect::route('employees.index')->with('success', 'Empleado eliminado de manera exitosa.');
     }
 }

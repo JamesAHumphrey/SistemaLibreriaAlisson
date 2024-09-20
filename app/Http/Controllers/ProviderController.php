@@ -38,7 +38,7 @@ class ProviderController extends Controller
     {
         Provider::create($request->validated());
 
-        return Redirect::route('providers.index')->with('success', 'Provider created successfully.');
+        return Redirect::route('providers.index')->with('success', 'Proveedor creado de manera exitosa..');
     }
 
     /**
@@ -68,13 +68,13 @@ class ProviderController extends Controller
     {
         $provider->update($request->validated());
 
-        return Redirect::route('providers.index')->with('success', 'Provider updated successfully');
+        return Redirect::route('providers.index')->with('success', 'Proveedor actualizado de manera exitosa.');
     }
 
     public function destroy($id): RedirectResponse
     {
         Provider::find($id)->delete();
 
-        return Redirect::route('providers.index')->with('success', 'Provider deleted successfully');
+        return Redirect::route('providers.index')->with('success', 'Proveedor eliminado de manera exitosa.');
     }
 }

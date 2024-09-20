@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
         Product::create($request->validated());
 
-        return Redirect::route('products.index')->with('success', 'Product created successfully.');
+        return Redirect::route('products.index')->with('success', 'Producto creado de manera exitosa.');
     }
 
     /**
@@ -76,13 +76,13 @@ class ProductController extends Controller
     {
         $product->update($request->validated());
 
-        return Redirect::route('products.index')->with('success', 'Product updated successfully');
+        return Redirect::route('products.index')->with('success', 'Producto actualizado de manera exitosa');
     }
 
     public function destroy($id): RedirectResponse
     {
         Product::find($id)->delete();
 
-        return Redirect::route('products.index')->with('success', 'Product deleted successfully');
+        return Redirect::route('products.index')->with('success', 'Producto eliminado de manera exitosa');
     }
 }

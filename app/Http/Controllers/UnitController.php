@@ -38,7 +38,7 @@ class UnitController extends Controller
     {
         Unit::create($request->validated());
 
-        return Redirect::route('units.index')->with('success', 'Unit created successfully.');
+        return Redirect::route('units.index')->with('success', 'Unidad creada de manera exitosa..');
     }
 
     /**
@@ -68,13 +68,13 @@ class UnitController extends Controller
     {
         $unit->update($request->validated());
 
-        return Redirect::route('units.index')->with('success', 'Unit updated successfully');
+        return Redirect::route('units.index')->with('success', 'Unidad actualizada de manera exitosa.');
     }
 
     public function destroy($id): RedirectResponse
     {
         Unit::find($id)->delete();
 
-        return Redirect::route('units.index')->with('success', 'Unit deleted successfully');
+        return Redirect::route('units.index')->with('success', 'Unidad eliminada de manera exitosa.');
     }
 }
