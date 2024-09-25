@@ -56,4 +56,9 @@ class User extends Authenticatable
             return asset('img/theme/user.png');
         }
     }
+    
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'user_id', 'id');
+    }
 }

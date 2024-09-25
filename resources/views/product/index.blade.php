@@ -30,6 +30,7 @@
                                 <th scope="col"><i class="fas fa-check"></i> Categoría</th>
                                 <th scope="col"><i class="fas fa-th"></i> Unidad</th>
                                 <th scope="col"><i class="fas fa-th-list"></i> Marca</th>
+                                <th scope="col"><i class="fas fa-th-list"></i> Inventario inicial</th>
                                 <th scope="col"><i class="fas fa-calendar-check"></i> Fecha de Registro</th>
                                 <th scope="col"><i class="fas fa-cogs"></i> Acciones</th>
                             </tr>
@@ -76,6 +77,10 @@
 
                                     <td >
                                         {{ $product->brand->name}}
+                                    </td>
+
+                                    <td >
+                                        {{ $product->initial_inventory}}
                                     </td>
 
                                     <td>

@@ -6,8 +6,10 @@ use App\Models\Animal;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,5 +43,10 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('test@gmail.com')
             ],
         );
+
+        DB::table('types')->insert([
+            'name' => 'Inventario inicial',
+            'transaction' => 'Entrada',
+        ]);
     }
 }

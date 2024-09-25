@@ -50,7 +50,7 @@
                                     </td>
 
                                     <td>
-                                        {{ $employee->user->name }}
+                                        {{ $employee->user->name}}
                                     </td>
 
                                     <td>

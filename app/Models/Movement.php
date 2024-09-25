@@ -41,6 +41,21 @@ class Movement extends Model
      */
     protected $fillable = ['observation', 'amount', 'unit_value', 'total_value', 'date', 'unit_value_balance', 'total_balance', 'amount_balance', 'code', 'product_id', 'type_id', 'employee_id'];
 
+    public static function generateCode(): string
+    {
+        $lastMovement = self::orderBy('id', 'desc')->first();
+        $lastCode = $lastMovement ? $lastMovement->code : null;
+
+        if ($lastCode) {
+            $lastNumber = (int) str_replace('INI-', '', $lastCode);
+            $newNumber = $lastNumber + 1;
+        } else {
+            $newNumber = 1;
+        }
+
+        return 'INI-' . $newNumber;
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

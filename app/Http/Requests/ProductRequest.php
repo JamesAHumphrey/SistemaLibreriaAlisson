@@ -14,6 +14,17 @@ class ProductRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'current_stock' => $this->input('current_stock') ?? 0,
+            'current_total' => $this->input('current_total') ?? 0,
+            'current_unit_price' => $this->input('current_unit_price') ?? 0,
+            'minimum_stocks' => $this->input('minimum_stocks') ?? 0,
+            'initial_inventory' => $this->input('initial_inventory') ? true : 0,
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -21,19 +32,22 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
 			'name' => 'required|string',
 			'description' => 'string',
-			'retail_price' => 'required',
-			'wholesale_price' => 'required',
-			'current_stock' => 'required',
-			'current_total' => 'required',
-			'current_unit_price' => 'required',
-			'minimum_stocks' => 'required',
+			'retail_price' => 'required|numeric|min:0',
+			'wholesale_price' => 'required|numeric|min:0',
 			'code' => 'required|string',
 			'category_id' => 'required',
 			'unit_id' => 'required',
-            'brand_id' => 'required'
+            'brand_id' => 'required',
+            'current_stock' => 'required|numeric|min:0',
+            'current_total' => 'required|numeric|min:0',
+            'current_unit_price' => 'required|numeric|min:0',
+            'minimum_stocks' => 'required|numeric|min:0',
+            'initial_inventory' => 'required'
         ];
+
+        return $rules;
     }
 }

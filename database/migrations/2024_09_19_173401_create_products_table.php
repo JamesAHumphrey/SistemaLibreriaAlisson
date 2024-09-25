@@ -18,14 +18,15 @@ return new class extends Migration
             $table->decimal('retail_price',10,2);
             $table->decimal('wholesale_price',10,2);
 
-            $table->integer('current_stock');
-            $table->decimal('current_total',10,2);
-            $table->decimal('current_unit_price',10,2);
+            $table->integer('current_stock')->default(0);
+            $table->decimal('current_total',10,2)->default(0.0);
+            $table->decimal('current_unit_price',10,2)->default(0.0);
 
-            $table->integer('minimum_stocks');
+            $table->integer('minimum_stocks')->default(0);
 
             $table->string('code', 50)->unique();
 
+            $table->boolean('initial_inventory')->default(false);
 
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
