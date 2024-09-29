@@ -12,6 +12,10 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+
+
+Route::get('/products/{id}', [ProductController::class, 'getProductDetails']);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,8 +44,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('product-purchases', ProductPurchaseController::class);
     Route::resource('sales', SaleController::class);
     Route::resource('product-sales', ProductSaleController::class);
-    
+    //Route::resource('brands', BrandController::class);
+
+    Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('purchases.create');
+    Route::post('/purchases/store', [PurchaseController::class, 'store'])->name('purchases.store');
+
+
 });
+
+
 
 
 require __DIR__ . '/auth.php';
