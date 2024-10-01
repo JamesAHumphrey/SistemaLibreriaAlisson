@@ -1,4 +1,4 @@
-<h6 class="heading-small text-muted mb-4">Datos de la Categoria</h6>
+<h6 class="heading-small text-muted mb-4">Datos del empleado</h6>
 <div class="pl-lg-4">
     <div class="row">
         <div class="col-lg-6">
