@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movement;
+use App\Models\Product;
+use App\Models\Type;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\MovementRequest;
@@ -27,8 +29,9 @@ class MovementController extends Controller
     public function create(): View
     {
         $movement = new Movement();
-
-        return view('movement.create', compact('movement'));
+        $products = Product::all();
+        $types = Type::whereNot('name', 'Inventario inicial')->get();
+        return view('movement.create', compact('movement','products','types'));
     }
 
     /**
@@ -57,8 +60,9 @@ class MovementController extends Controller
     public function edit($id): View
     {
         $movement = Movement::find($id);
-
-        return view('movement.edit', compact('movement'));
+        $products = Product::all();
+        $types = Type::all();
+        return view('movement.edit', compact('movement','products','types'));
     }
 
     /**

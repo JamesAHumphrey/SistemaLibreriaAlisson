@@ -1,69 +1,145 @@
-<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="observation" class="form-label">{{ __('Observation') }}</label>
-            <input type="text" name="observation" class="form-control @error('observation') is-invalid @enderror" value="{{ old('observation', $movement?->observation) }}" id="observation" placeholder="Observation">
-            {!! $errors->first('observation', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+<h6 class="heading-small text-muted mb-4">Datos del movimiento</h6>
+<div class="pl-lg-4">
+    <div class="row">
+
+
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="form-control-label" for="input-type_id">Tipo de movimiento</label>
+                <select class="form-control form-control-alternative" name="type_id" id="input-type_id">
+                    <option disabled @selected(true)>Seleccionar un tipo</option>
+                    @foreach ($types as $type)
+                        <option value="{{$type->id}}" @selected(old('type_id', $movement->type_id) == $type->id)>
+                            {{$type->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="amount" class="form-label">{{ __('Amount') }}</label>
-            <input type="text" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount', $movement?->amount) }}" id="amount" placeholder="Amount">
-            {!! $errors->first('amount', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            
+            <div class="form-group">
+                <label class="form-control-label" for="input-observation">Observaciones</label>
+                <input type="text" id="input-observation" name="observation" class="form-control form-control-alternative"
+                    placeholder="Agregar observaciones del movimiento realizado" value="{{ old('observation', $movement->observation) }}">
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="unit_value" class="form-label">{{ __('Unit Value') }}</label>
-            <input type="text" name="unit_value" class="form-control @error('unit_value') is-invalid @enderror" value="{{ old('unit_value', $movement?->unit_value) }}" id="unit_value" placeholder="Unit Value">
-            {!! $errors->first('unit_value', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label class="form-control-label" for="input-product_id">Productos</label>
+                <select class="form-control form-control-alternative" name="product_id" id="input-product_id">
+                    <option disabled @selected(true)>Seleccionar el producto</option>
+                    @foreach ($products as $product)
+                        <option value="{{$product->id}}" @selected(old('product_id', $movement->product_id)== $product->id)>
+                            {{$product->name}}
+                        </option> 
+                    @endforeach
+                    
+                </select>
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="total_value" class="form-label">{{ __('Total Value') }}</label>
-            <input type="text" name="total_value" class="form-control @error('total_value') is-invalid @enderror" value="{{ old('total_value', $movement?->total_value) }}" id="total_value" placeholder="Total Value">
-            {!! $errors->first('total_value', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="form-control-label" for="input-code">Código</label>
+                <input type="text" id="input-code" name="code" class="form-control form-control-alternative"
+                    placeholder="Agregar el código" value="{{ old('code', $movement->code) }}" >
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="date" class="form-label">{{ __('Date') }}</label>
-            <input type="text" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date', $movement?->date) }}" id="date" placeholder="Date">
-            {!! $errors->first('date', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" for="input-date">Date</label>
+                <input type="date" id="input-date" name="date" value="{{ old('date', $movement->date) }}" class="form-control form-control-alternative"
+                    placeholder="Select Date">
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="unit_value_balance" class="form-label">{{ __('Unit Value Balance') }}</label>
-            <input type="text" name="unit_value_balance" class="form-control @error('unit_value_balance') is-invalid @enderror" value="{{ old('unit_value_balance', $movement?->unit_value_balance) }}" id="unit_value_balance" placeholder="Unit Value Balance">
-            {!! $errors->first('unit_value_balance', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label class="form-control-label" for="input-amount">Cantidad</label>
+                <input type="number" id="input-amount" name="amount" class="form-control form-control-alternative"
+                    placeholder="Ingresa la cantidad" value="{{ old('amount', $movement->amount) }}">
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="total_balance" class="form-label">{{ __('Total Balance') }}</label>
-            <input type="text" name="total_balance" class="form-control @error('total_balance') is-invalid @enderror" value="{{ old('total_balance', $movement?->total_balance) }}" id="total_balance" placeholder="Total Balance">
-            {!! $errors->first('total_balance', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label class="form-control-label" for="input-unit_value">Precio Unitario</label>
+                <input type="number" id="input-unit_value" name="unit_value" class="form-control form-control-alternative"
+                    placeholder="Ingresa el precio unitario" value="{{ old('unit_value', $movement->unit_value) }}" disabled="true">
+            </div>
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="amount_balance" class="form-label">{{ __('Amount Balance') }}</label>
-            <input type="text" name="amount_balance" class="form-control @error('amount_balance') is-invalid @enderror" value="{{ old('amount_balance', $movement?->amount_balance) }}" id="amount_balance" placeholder="Amount Balance">
-            {!! $errors->first('amount_balance', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="code" class="form-label">{{ __('Code') }}</label>
-            <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" value="{{ old('code', $movement?->code) }}" id="code" placeholder="Code">
-            {!! $errors->first('code', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="product_id" class="form-label">{{ __('Product Id') }}</label>
-            <input type="text" name="product_id" class="form-control @error('product_id') is-invalid @enderror" value="{{ old('product_id', $movement?->product_id) }}" id="product_id" placeholder="Product Id">
-            {!! $errors->first('product_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="type_id" class="form-label">{{ __('Type Id') }}</label>
-            <input type="text" name="type_id" class="form-control @error('type_id') is-invalid @enderror" value="{{ old('type_id', $movement?->type_id) }}" id="type_id" placeholder="Type Id">
-            {!! $errors->first('type_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="employee_id" class="form-label">{{ __('Employee Id') }}</label>
-            <input type="text" name="employee_id" class="form-control @error('employee_id') is-invalid @enderror" value="{{ old('employee_id', $movement?->employee_id) }}" id="employee_id" placeholder="Employee Id">
-            {!! $errors->first('employee_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label class="form-control-label" for="input-total_value">Total</label>
+                <input type="number" id="input-total_value" name="total_value" class="form-control form-control-alternative" disabled="true"
+                    placeholder="Total" value="{{ old('total_value', $movement->total_value) }}">
+            </div>
         </div>
 
     </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+</div>
+
+<hr class="my-4" />
+<!-- Contenido -->
+<h6 class="heading-small text-muted mb-4">Guardar</h6>
+<div class="pl-lg-4">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Registrar
+        </button>
     </div>
 </div>
+
+<script>
+    document.getElementById('input-type_id').addEventListener('change', function() {
+        var selectedValue = this.options[this.selectedIndex].text;
+        var unitValueInput = document.getElementById('input-unit_value');
+        var totalValueInput = document.getElementById('input-total_value');
+
+        if (selectedValue === 'Inventario inicial') {
+            unitValueInput.disabled = false;
+            totalValueInput.disabled = false;
+        } else {
+            unitValueInput.disabled = true;
+            totalValueInput.disabled = true;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const unitPriceInput = document.getElementById('input-unit_value');
+        const stocksInput = document.getElementById('input-amount');
+        const totalInput = document.getElementById('input-total_value');
+
+        function formatNumber(value) {
+            return parseFloat(value).toFixed(2);
+        }
+
+        function calculateTotal() {
+            const unitPrice = parseFloat(unitPriceInput.value) || 0;
+            const stocks = parseFloat(stocksInput.value) || 0;
+            const total = unitPrice * stocks;
+            totalInput.value = total.toFixed(2);
+        }
+
+        function formatInput(event) {
+            const value = event.target.value;
+            if (value) {
+                event.target.value = formatNumber(value);
+            }
+        }
+
+        // totalInput.value = '0.00';
+
+        unitPriceInput.addEventListener('input', calculateTotal);
+        stocksInput.addEventListener('input', calculateTotal);
+
+        unitPriceInput.addEventListener('blur', formatInput);
+    });
+</script>

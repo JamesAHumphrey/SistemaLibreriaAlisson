@@ -92,6 +92,13 @@
             </a>
         </li>
 
+        <li class="nav-item {{ Request::route()->named('movements.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('movements.index') ? 'active' : '' }}"
+                href="{{ route('movements.index') }}" wire:navigate>
+                <i class="fas fa-arrows-alt-h text-blue"></i> Movimientos
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

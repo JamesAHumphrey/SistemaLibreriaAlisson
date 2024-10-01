@@ -1,29 +1,28 @@
-@extends('layouts.app')
-
-@section('template_title')
-    {{ __('Update') }} Movement
-@endsection
+@extends('layouts.panel')
+@section('title', 'Movement/Update')
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="">
-            <div class="col-md-12">
-
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Movement</span>
+    <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Actualizar Movimiento</h3>
                     </div>
-                    <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('movements.update', $movement->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            @csrf
-
-                            @include('movement.form')
-
-                        </form>
+                    <div class="col-4 text-right">
+                        <a href="{{ route('movements.index') }}" class="btn btn-sm btn-primary"><i
+                                class="fas fa-arrow-left"></i>
+                            Volver</a>
                     </div>
                 </div>
             </div>
+            <div class="card-body container-fluid">
+                <form action="{{ route('movements.update', $movement) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    @include('movement.form')
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
 @endsection

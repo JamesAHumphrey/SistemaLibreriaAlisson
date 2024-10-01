@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('observation',1500)->nullable();
+            $table->text('observation')->nullable();
 
             $table->integer('amount');
             $table->decimal('unit_value',10,2);
             $table->decimal('total_value',10,2);
             $table->date('date');
 
-            $table->integer('unit_value_balance');
-            $table->integer('total_balance');
+            $table->decimal('unit_value_balance',10,2);
+            $table->decimal('total_balance',10,2);
             $table->integer('amount_balance');
             
             $table->string('code',16)->unique();
