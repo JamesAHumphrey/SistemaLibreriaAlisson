@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purchase;
+use DB;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Http\Controllers\FunctionController;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Provider;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductPurchase;
-
+use Termwind\Components\Dd;
 
 class PurchaseController extends Controller
 {
@@ -41,60 +45,45 @@ class PurchaseController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(PurchaseRequest $request): RedirectResponse
     {
-        dd($request->all());
-
-        // Validar los datos recibidos
-        $request->validate([
-            'invoice_number' => 'required|string',
-            'provider_id' => 'required|exists:providers,id',
-            'products' => 'required|array',
-            'products.*.product_id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|integer|min:1',
-            'products.*.price' => 'required|numeric|min:0',
-            'date' => 'required|date',
-            'code' => 'required|string',
-        ]);
-    
-        // Crear la compra principal
-        $purchase = new Purchase();
-        $purchase->invoice_number = $request->invoice_number;
-        $purchase->provider_id = $request->provider_id;
-        $purchase->total = $request->total;
-        $purchase->employee_id = auth()->user()->employee->id; 
-        $purchase->date = $request->date; // Usa la fecha enviada
-        $purchase->code = $request->code ?? 'P-' . uniqid(); // Asigna el código o genera uno si no está presente
-        $purchase->save();
-    
-        // Procesar los productos
-        foreach ($request->products as $product) {
-            // Buscar el producto en el inventario
-            $prod = Product::find($product['product_id']);
+        try{
+            DB::beginTransaction();
             
-            // Actualizar el precio unitario si es diferente al que ya existe
-            if ($prod->current_unit_price != $product['price']) {
-                $prod->current_unit_price = $product['price'];
-            }
-    
+            $products = json_decode($request->input('products'), true);
+            $validatedData = $request->validated();
+            $validatedData['code'] = FunctionController::generateCodeCompras();
+            $validatedData['employee_id'] = Auth::user()->employee->id;        
+            $purchase = Purchase::create($validatedData);
+
+            
+        // Procesar los productos
+        foreach ($products as $prod) {
+            // Buscar el producto en el inventario
+            $product = Product::find($prod['product_id']);
+            
             // Actualizar el stock sumando la cantidad
-            $prod->current_stock += $product['quantity'];
-            $prod->save();
-    
+            $product->current_stock += $prod['amount'];
+            $product->save();
+
             // Crear el registro en la tabla intermedia de productos de la compra
             ProductPurchase::create([
                 'purchase_id' => $purchase->id,
-                'product_id' => $product['product_id'],
-                'amount' => $product['quantity'],
-                'purchase_price' => $product['price'],
-                'total' => $product['quantity'] * $product['price'],
+                'product_id' => $prod['product_id'],
+                'amount' => $prod['amount'],
+                'purchase_price' => $prod['purchase_price'],
+                'total' => $prod['amount'] * $prod['purchase_price'],
             ]);
         }
-    
-        return redirect()->route('purchases.index')->with('success', 'Compra registrada exitosamente');
+
+            DB::commit();
+            return redirect()->route('purchases.create')->with('success', 'Compra registrada exitosamente');
+
+        }
+        catch(Exception $e){
+            DB::rollBack();
+            return Redirect::route('purchases.create')->with('error','Ocurrió un error inesperado: '.$e->getMessage());
+        }
     }
     
 

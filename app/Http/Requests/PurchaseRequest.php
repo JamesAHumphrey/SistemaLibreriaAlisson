@@ -26,6 +26,7 @@ class PurchaseRequest extends FormRequest
 			'date' => 'required',
 			'invoice_number' => 'required|string',
 			'code' => 'required|string',
+            'provider_id'=> 'integer',
         ];
     }
 }
