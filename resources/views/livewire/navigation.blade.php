@@ -78,6 +78,13 @@
             </a>
         </li>
 
+        <li class="nav-item {{ Request::route()->named('purchases.create') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('purchases.create') ? 'active' : '' }}"
+                href="{{ route('purchases.create') }}" wire:navigate>
+                <i class="fas fa-box text-blue"></i> Compras 
+            </a>
+        </li>
+
         <li class="nav-item {{ Request::route()->named('providers.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('providers.index') ? 'active' : '' }}"
                 href="{{ route('providers.index') }}" wire:navigate>

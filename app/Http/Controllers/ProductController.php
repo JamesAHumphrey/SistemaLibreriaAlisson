@@ -107,4 +107,17 @@ class ProductController extends Controller
 
         return Redirect::route('products.index')->with('success', 'Producto eliminado de manera exitosa.');
     }
+
+    public function getProductDetails($id)
+    {
+        $product = Product::with('category')->find($id);
+    
+        if ($product) {
+            return response()->json($product);
+        } else {
+            return response()->json(['error' => 'no se encontro el producto'], 404);
+        }
+    }
+    
+
 }
