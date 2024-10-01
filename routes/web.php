@@ -46,12 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('product-purchases', ProductPurchaseController::class);
     Route::resource('sales', SaleController::class);
     Route::resource('product-sales', ProductSaleController::class);
-    //Route::resource('brands', BrandController::class);
+    Route::resource('brands', BrandController::class);
 
     Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('purchases.create');
     Route::post('/purchases/store', [PurchaseController::class, 'store'])->name('purchases.store');
-
-Route::resource('brands', BrandController::class);
 });
 
 

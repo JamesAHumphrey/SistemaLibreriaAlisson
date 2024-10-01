@@ -44,21 +44,6 @@ class Product extends Model
      */
     protected $fillable = ['name', 'description', 'retail_price', 'wholesale_price', 'current_stock', 'current_total', 'current_unit_price', 'minimum_stocks', 'code', 'category_id', 'unit_id', 'brand_id','initial_inventory'];
 
-    // public static function generateCode(): string
-    // {
-    //     $lastProduct = self::withTrashed()->orderBy('id', 'desc')->first();
-    //     $lastCode = $lastProduct ? $lastProduct->movement_code : null;
-
-    //     if ($lastCode) {
-    //         $lastNumber = (int) str_replace('INI-', '', $lastCode);
-    //         $newNumber = $lastNumber + 1;
-    //     } else {
-    //         $newNumber = 1;
-    //     }
-
-    //     return 'INI-' . $newNumber;
-    // }
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
