@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movement;
+use App\Models\Purchase;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -48,5 +49,20 @@ class FunctionController extends Controller
         }
 
         return 'INI-' . $newNumber;
+    }
+
+    public static function generateCodeCompras(): string
+    {
+        $lastMovement = Purchase::orderBy('id', 'desc')->first();
+        $lastCode = $lastMovement ? $lastMovement->code : null;
+
+        if ($lastCode) {
+            $lastNumber = (int) str_replace('COM-', '', $lastCode);
+            $newNumber = $lastNumber + 1;
+        } else {
+            $newNumber = 1;
+        }
+
+        return 'COM-' . $newNumber;
     }
 }
