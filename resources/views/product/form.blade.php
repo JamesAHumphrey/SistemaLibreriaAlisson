@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="input-code">Código</label>
                 <input type="text" id="input-code" name="code" class="form-control form-control-alternative"
@@ -121,13 +121,6 @@
         </div> --}}
     </div>
     <div class="row">
-        {{-- <div class="col-lg-3">
-            <div class="form-group">
-                <label class="form-control-label" for="input-current_total">Inversión total</label>
-                <input type="number" id="input-current_total" name="current_total" class="form-control form-control-alternative"
-                    placeholder="Inversión monetaria" value="{{ old('current_total', $product->current_total) }}">
-            </div>
-        </div> --}}
         <div class="col-lg-3">
             <div class="form-group">
                 <label class="form-control-label" for="input-current_unit_price">Precio unitario </label>
