@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
+        {{-- <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="input-user_id">Usuarios</label>
                 <select class="form-control form-control-alternative" name="user_id" id="user_id">
@@ -50,7 +50,7 @@
                     
                 </select>
             </div>
-        </div>
+        </div> --}}
         
     </div>
 </div>

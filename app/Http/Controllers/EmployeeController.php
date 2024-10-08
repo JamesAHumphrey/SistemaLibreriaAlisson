@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmployeeRequest;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -36,8 +38,36 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request): RedirectResponse
     {
-        Employee::create($request->validated());
-        return Redirect::route('employees.index')->with('success', 'Empleado creado de manera exitosa.');
+        try {
+            DB::beginTransaction();
+            $validated = $request->validated();
+            $username = substr($validated['name'], 0, 3) . str_replace(' ', '', $validated['surname']);
+            // Eliminar espacios del campo name para la contraseña
+            $cleanedName = str_replace(' ', '', $validated['name']);
+            // Generar la contraseña
+            $password = $cleanedName . date('Y');
+            // Contar el número de usuarios con el mismo nombre
+            $userCount = User::where('name', $validated['name'])->count();
+            // Generar el correo temporal
+            $email = $cleanedName . $userCount . '@temporal.com';
+
+            $user = User::create([
+                'name' => $username,
+                'email' => $email,
+                'password' => bcrypt($password),
+            ]);
+
+            $validated['user_id'] = $user->id;
+    
+            // Crear el empleado
+            Employee::create($validated);
+    
+            DB::commit();
+            return Redirect::route('employees.index')->with('success', 'Empleado creado de manera exitosa.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return Redirect::route('employees.index')->with('error', 'Ocurrió un error inesperado: ' . $e->getMessage());
+        }
     }
 
     /**
