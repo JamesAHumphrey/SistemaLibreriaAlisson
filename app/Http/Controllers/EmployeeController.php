@@ -41,14 +41,12 @@ class EmployeeController extends Controller
         try {
             DB::beginTransaction();
             $validated = $request->validated();
-            $username = substr($validated['name'], 0, 3) . str_replace(' ', '', $validated['surname']);
-            // Eliminar espacios del campo name para la contraseña
+            $username = substr($validated['name'], 0, 3) . str_replace(' ', '', $validated['surname']);      
+            // Eliminar espacios del campo name para la cotraseña y correo
             $cleanedName = str_replace(' ', '', $validated['name']);
-            // Generar la contraseña
             $password = $cleanedName . date('Y');
-            // Contar el número de usuarios con el mismo nombre
             $userCount = User::where('name', $validated['name'])->count();
-            // Generar el correo temporal
+            // Generar un correo temporal
             $email = $cleanedName . $userCount . '@temporal.com';
 
             $user = User::create([
