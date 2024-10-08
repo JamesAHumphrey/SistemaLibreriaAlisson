@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purchase;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -56,25 +56,25 @@ class PurchaseController extends Controller
             $validatedData['employee_id'] = Auth::user()->employee->id;        
             $purchase = Purchase::create($validatedData);
 
-            
-        // Procesar los productos
-        foreach ($products as $prod) {
-            // Buscar el producto en el inventario
-            $product = Product::find($prod['product_id']);
-            
-            // Actualizar el stock sumando la cantidad
-            $product->current_stock += $prod['amount'];
-            $product->save();
 
-            // Crear el registro en la tabla intermedia de productos de la compra
-            ProductPurchase::create([
-                'purchase_id' => $purchase->id,
-                'product_id' => $prod['product_id'],
-                'amount' => $prod['amount'],
-                'purchase_price' => $prod['purchase_price'],
-                'total' => $prod['amount'] * $prod['purchase_price'],
-            ]);
-        }
+            // Procesar los productos
+            foreach ($products as $prod) {
+                // Buscar el producto en el inventario
+                $product = Product::find($prod['product_id']);
+            
+                // Actualizar el stock sumando la cantidad
+                $product->current_stock += $prod['amount'];
+                $product->save();
+
+                // Crear el registro en la tabla intermedia de productos de la compra
+                ProductPurchase::create([
+                    'purchase_id' => $purchase->id,
+                    'product_id' => $prod['product_id'],
+                    'amount' => $prod['amount'],
+                    'purchase_price' => $prod['purchase_price'],
+                    'total' => $prod['amount'] * $prod['purchase_price'],
+                ]);
+            }   
 
             DB::commit();
             return redirect()->route('purchases.create')->with('success', 'Compra registrada exitosamente');
@@ -104,8 +104,12 @@ class PurchaseController extends Controller
     public function edit($id): View
     {
         $purchase = Purchase::find($id);
+        $providers = Provider::all();
+        $categories = Category::all();
+        $products = Product::all();
 
-        return view('purchase.edit', compact('purchase'));
+        return view('purchase.edit', compact('providers', 'categories', 'products','purchase'));
+
     }
 
     /**

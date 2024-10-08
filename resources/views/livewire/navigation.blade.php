@@ -78,9 +78,9 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::route()->named('purchases.create') ? 'active' : '' }}">
-            <a class="nav-link {{ Request::route()->named('purchases.create') ? 'active' : '' }}"
-                href="{{ route('purchases.create') }}" wire:navigate>
+        <li class="nav-item {{ Request::route()->named('purchases.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('purchases.index') ? 'active' : '' }}"
+                href="{{ route('purchases.index') }}" wire:navigate>
                 <i class="fas fa-box text-blue"></i> Compras 
             </a>
         </li>

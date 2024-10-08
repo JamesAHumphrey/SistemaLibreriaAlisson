@@ -19,7 +19,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="invoice_number">Número de factura</label>
-                    <input type="text" id="invoice_number" name="invoice_number" class="form-control" required>
+                    <input type="text" id="invoice_number" name="invoice_number" class="form-control" required value="{{ old('invoice_number', $purchase->invoice_number) }}">
             </div>
                             
         </div>
@@ -38,91 +38,89 @@
             </div>
         </div>
 
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="date">Fecha</label>
+                <input type="text" id="date" name="date" class="form-control" value="{{ old('date', isset($purchase) ? $purchase->date : now()) }}" readonly required>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+            <label for="input-ode">Código </label>
+            <input type="text" id="input-code" name="code" class="form-control" readonly required value="{{ old('invoice_number', $purchase->code) }}">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+            <label for="purchase_price">Precio Unitario</label>
+            <input type="number" id="purchase_price" name="purchase_price" class="form-control" step="0.01" >
+            </div>
+        </div>
 
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="date">Fecha</label>
-                                <input type="text" id="date" name="date" class="form-control" value="{{ now() }}" readonly required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                            <label for="product_code">Código del Producto</label>
-                            <input type="text" id="product_code" name="code" class="form-control" readonly required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                            <label for="purchase_price">Precio Unitario</label>
-                            <input type="number" id="purchase_price" name="purchase_price" class="form-control" step="0.01" >
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                            <label for="category">Categoría</label>
-                            <input type="text" id="category" name="category" class="form-control" readonly required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                            <label for="amount">Cantidad</label>
-                            <input type="number" id="amount" name="amount" class="form-control" >
-                            </div>
-                        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+            <label for="category">Categoría</label>
+            <input type="text" id="category" name="category" class="form-control" readonly required>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+            <label for="amount">Cantidad</label>
+            <input type="number" id="amount" name="amount" class="form-control" >
+            </div>
+        </div>
 
                         
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                <h4 class="mt-4">Productos</h4>
-                                <table class="table table-bordered" id="products_table">
-                                    <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>Total</th>
-                                            <th>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="products_body">
-                                        <!-- aqui se cargan las filas dinamicas  -->
-                                    </tbody>
-                                </table>
-                                </div>
-                            </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+            <h4 class="mt-4">Productos</h4>
+            <table class="table table-bordered" id="products_table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="products_body">
+                    <!-- aqui se cargan las filas dinamicas  -->
+                </tbody>
+            </table>
+            </div>
+        </div>
                         
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="addProductToCart()">Agregar más</button>
-                        </div>
-                    </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+            <button type="button" class="btn btn-primary" onclick="addProductToCart()">Agregar más</button>
+            </div>
+        </div>
 
 
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                            <label for="subtotal">Subtotal</label>
-                            <input type="text" id="subtotal" name="subtotal" class="form-control" readonly>
-                            </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+            <label for="subtotal">Subtotal</label>
+            <input type="text" id="subtotal" name="subtotal" class="form-control" readonly>
+            </div>
                         
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                            <label for="discount">Descuento (%)</label>
-                            <input type="number" id="discount" name="discount" class="form-control" oninput="calculateTotal()">
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                            <label for="total">Gran Total</label>
-                            <input type="text" id="total" name="total" class="form-control" readonly>
-                            </div>
-                        </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+            <label for="discount">Descuento (%)</label>
+            <input type="number" id="discount" name="discount" class="form-control" oninput="calculateTotal()">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+            <label for="total">Gran Total</label>
+            <input type="text" id="total" name="total" class="form-control" readonly value="{{ old('amount', $purchase->total) }}">
+            </div>
+        </div>
 
-
-                    <!-- Campo oculto para productos -->
-                    <input type="hidden" name="products" id="products">
-                    <input type="hidden" name="code" value="{{ old('code', 'P-' . uniqid()) }}">   
+        <!-- Campo oculto para productos -->
+        <input type="hidden" name="products" id="products">
+        <input type="hidden" name="code" value="{{ old('code', 'P-' . uniqid()) }}">   
                      
                  
     </div>
