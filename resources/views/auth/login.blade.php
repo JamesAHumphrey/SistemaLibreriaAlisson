@@ -31,8 +31,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="Email" id="email" type="email"
-                                        name="email" :value="old('email')" required autofocus autocomplete="username">
+                                    <input class="form-control" placeholder="Name" id="name" type="text"
+                                        name="name" :value="old('name')" required autofocus autocomplete="username">
                                 </div>
                             </div>
                             <div class="form-group">
