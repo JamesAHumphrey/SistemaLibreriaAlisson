@@ -42,8 +42,6 @@
             </div>
         </div>
 
-        
-        
         <div class="col-lg-4">
             <div class="form-group">
                 <label class="form-control-label" for="input-category_id">Categorias</label>
@@ -112,13 +110,6 @@
             <hr class="my-4" />
             <h6 class="heading-small text-muted mb-4">Inventario Inicial</h6>
         </div>
-        {{-- <div class="col-lg-6">
-            <div class="form-group">
-                <label class="form-control-label" for="input-movement_code">Código</label>
-                <input type="text" id="input-movement_code" name="movement_code" class="form-control form-control-alternative"
-                    placeholder="Ingresa el código del movimiento" >
-            </div>
-        </div> --}}
     </div>
     <div class="row">
         <div class="col-lg-3">
