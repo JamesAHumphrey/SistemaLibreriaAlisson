@@ -15,7 +15,7 @@ class FunctionController extends Controller
         //Asignación y calculo de valores
         $request['movement_code'] = FunctionController::generateCode();
         $request['product_id'] = $product->id;
-        $request['employee_id'] = Auth::user()->employee->id;
+        $request['employee_id'] = Auth::user()->id;
         $request['current_total'] = $request['current_stock'] * $request['current_unit_price'];
 
         $movementData = [

@@ -53,7 +53,7 @@ class PurchaseController extends Controller
             $products = json_decode($request->input('products'), true);
             $validatedData = $request->validated();
             $validatedData['code'] = FunctionController::generateCodeCompras();
-            $validatedData['employee_id'] = Auth::user()->employee->id;        
+            $validatedData['employee_id'] = Auth::user()->id;        
             $purchase = Purchase::create($validatedData);
 
 
@@ -77,12 +77,12 @@ class PurchaseController extends Controller
             }   
 
             DB::commit();
-            return redirect()->route('purchases.create')->with('success', 'Compra registrada exitosamente');
+            return redirect()->route('purchases.index')->with('success', 'Compra registrada exitosamente');
 
         }
         catch(Exception $e){
             DB::rollBack();
-            return Redirect::route('purchases.create')->with('error','Ocurrió un error inesperado: '.$e->getMessage());
+            return Redirect::route('purchases.index')->with('error','Ocurrió un error inesperado: '.$e->getMessage());
         }
     }
     

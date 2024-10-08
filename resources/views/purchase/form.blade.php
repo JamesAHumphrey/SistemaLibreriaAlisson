@@ -40,8 +40,8 @@
 
         <div class="col-lg-6">
             <div class="form-group">
-                <label for="date">Fecha</label>
-                <input type="text" id="date" name="date" class="form-control" value="{{ old('date', isset($purchase) ? $purchase->date : now()) }}" readonly required>
+                <label for="input-date">Fecha</label>
+                <input type="date" id="input-date" name="date" class="form-control"  value="{{ old('date') ?: (isset($purchase->date) ? $purchase->date : now()->format('Y-m-d')) }}" readonly required>
             </div>
         </div>
         <div class="col-lg-6">
