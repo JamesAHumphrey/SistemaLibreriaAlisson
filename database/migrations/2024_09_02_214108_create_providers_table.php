@@ -15,8 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name',50);
             $table->string('phone',20);
-            $table->string('address',1500);
-            $table->string('email',50)->nullable();
+            $table->string('address',1500)->nullable();
+            $table->string('email',80)->nullable();
             $table->string('ruc',20)->unique();
 
             $table->timestamps();

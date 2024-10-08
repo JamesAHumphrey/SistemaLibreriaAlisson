@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('price',10,2);
-            $table->integer('amount');
 
-            $table->string('customer_name',50);
-            $table->string('customer_phone',20);
+            $table->date('date');
+
+            $table->string('customer_name',50)->nullable();
+            $table->string('customer_phone',20)->nullable();
 
             $table->decimal('subtotal',10,2);
             $table->decimal('total',10,2);
 
-            $table->decimal('discount',10,2);
+            $table->decimal('discount',10,2)->default(0);
 
             $table->string('invoice_number',100);
             $table->string('code',16)->unique();

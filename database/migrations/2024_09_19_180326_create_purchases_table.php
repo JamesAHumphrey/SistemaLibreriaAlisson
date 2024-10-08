@@ -16,7 +16,6 @@ return new class extends Migration
             $table->decimal('total',10,2);
             $table->date('date');
             $table->string('invoice_number',100);
-
             $table->string('code',16)->unique();
 
             $table->integer('provider_id')->unsigned()->nullable();
