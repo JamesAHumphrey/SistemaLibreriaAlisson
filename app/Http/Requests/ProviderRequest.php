@@ -27,7 +27,7 @@ class ProviderRequest extends FormRequest
 			'phone' => ['required','string','min:1','max:20'],
 			'address' => ['string','min:1','max:1500'],
 			'email' => ['string','min:1','max:80'],
-			'ruc' => ['required','string','min:1','max:20',Rule::unique('providers')->ignore($this->id)],
+			'ruc' => ['required','string','min:1','max:20',Rule::unique('providers')->ignore($this->route('provider'))],
         ];
     }
     public function messages():array{

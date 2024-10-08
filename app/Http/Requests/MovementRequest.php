@@ -31,7 +31,7 @@ class MovementRequest extends FormRequest
 			// 'unit_value_balance' => ['required','numeric','min:0'],
 			// 'total_balance' => ['required','numeric','min:0'],
 			// 'amount_balance' => ['required','integer','min:0'],
-            'code' => ['required','string','min:1','max:16',Rule::unique('movements')->ignore($this->id)],
+			'code' => ['required', 'string', 'min:1', 'max:16', Rule::unique('movements')->ignore($this->route('movement'))],
 			'product_id' => ['required','integer'],
 			'type_id' => ['required','integer'],
 			// 'employee_id' => ['required','integer']
