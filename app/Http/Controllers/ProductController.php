@@ -59,7 +59,7 @@ class ProductController extends Controller
 
             DB::commit();
             return Redirect::route('products.index')->with('success', 'Producto creado de manera exitosa.');
-
+                                
 
         } catch(Exception $e){
             DB::rollBack();
