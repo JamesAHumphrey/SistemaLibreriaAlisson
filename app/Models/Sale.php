@@ -36,7 +36,7 @@ class Sale extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['price', 'amount', 'customer_name', 'customer_phone', 'subtotal', 'total', 'discount', 'invoice_number', 'code', 'employee_id'];
+    protected $fillable = ['date','customer_name', 'customer_phone', 'subtotal', 'total', 'discount', 'invoice_number', 'code', 'employee_id'];
 
 
     /**
