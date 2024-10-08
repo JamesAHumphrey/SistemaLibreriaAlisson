@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create(
             [
-                'name' => 'Andriw Toruño',
+                'name' => 'Andriw',
                 'email' => 'andriw@gmail.com',
-                'password' => bcrypt('andriw@gmail.com')
+                'password' => bcrypt('Andriw')
             ],
         );
 
@@ -47,6 +47,26 @@ class DatabaseSeeder extends Seeder
         DB::table('types')->insert([
             'name' => 'Inventario inicial',
             'transaction' => 'Entrada',
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Compra',
+            'transaction' => 'Entrada',
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Venta',
+            'transaction' => 'Salida',
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Daño',
+            'transaction' => 'Salida',
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Perdida',
+            'transaction' => 'Salida',
         ]);
     }
 }
