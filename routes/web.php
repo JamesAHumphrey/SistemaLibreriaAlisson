@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/products/{id}', [ProductController::class, 'getProductDetails']);
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,22 +34,18 @@ Route::middleware('auth')->group(function () {
         Route::patch('/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
+
     Route::resource('categories', CategoryController::class);
     Route::resource('providers', ProviderController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('units', UnitController::class);
     Route::resource('products', ProductController::class);
-
-    //
     Route::resource('movements', MovementController::class);
     Route::resource('purchases', PurchaseController::class);
     Route::resource('product-purchases', ProductPurchaseController::class);
     Route::resource('sales', SaleController::class);
     Route::resource('product-sales', ProductSaleController::class);
     Route::resource('brands', BrandController::class);
-
-    Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('purchases.create');
-    Route::post('/purchases/store', [PurchaseController::class, 'store'])->name('purchases.store');
 });
 
 
