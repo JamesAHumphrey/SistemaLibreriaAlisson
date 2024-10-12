@@ -53,7 +53,7 @@ class PurchaseController extends Controller
             $products = json_decode($request->input('products'), true);
             $validatedData = $request->validated();
             $validatedData['code'] = FunctionController::generateCodeCompras();
-            $validatedData['employee_id'] = Auth::user()->id;        
+            $validatedData['employee_id'] = Auth::user()->employee->id;        
             $purchase = Purchase::create($validatedData);
 
 

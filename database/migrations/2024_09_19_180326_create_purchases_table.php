@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('invoice_number',100);
             $table->string('code',16)->unique();
 
-            $table->integer('provider_id')->unsigned()->nullable();
+            $table->integer('provider_id')->unsigned();
             $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('employee_id')->unsigned()->nullable();
