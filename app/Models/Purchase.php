@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Purchase extends Model
 {
-    
+
     protected $perPage = 20;
 
     /**
@@ -43,7 +43,7 @@ class Purchase extends Model
     {
         return $this->belongsTo(\App\Models\Employee::class, 'employee_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -51,13 +51,16 @@ class Purchase extends Model
     {
         return $this->belongsTo(\App\Models\Provider::class, 'provider_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productPurchases()
     {
-        return $this->hasMany(\App\Models\ProductPurchase::class, 'id', 'purchase_id');
+        /*
+        *Se modifico el orden de los id para la relacion
+        */
+        return $this->hasMany(\App\Models\ProductPurchase::class, 'purchase_id', 'id');
     }
-    
+
 }
