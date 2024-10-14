@@ -35,11 +35,11 @@ class PurchaseController extends Controller
      */
     public function create(): View
     {
-        $purchase = new Purchase();     
+        $purchase = new Purchase();
         $providers = Provider::all();
         $categories = Category::all();
         $products = Product::all();
-        
+
         return view('purchase.create', compact('providers', 'categories', 'products','purchase'));
 
 
@@ -49,11 +49,11 @@ class PurchaseController extends Controller
     {
         try{
             DB::beginTransaction();
-            
+
             $products = json_decode($request->input('products'), true);
             $validatedData = $request->validated();
             $validatedData['code'] = FunctionController::generateCodeCompras();
-            $validatedData['employee_id'] = Auth::user()->employee->id;        
+            $validatedData['employee_id'] = Auth::user()->employee->id;
             $purchase = Purchase::create($validatedData);
 
 
@@ -61,7 +61,7 @@ class PurchaseController extends Controller
             foreach ($products as $prod) {
                 // Buscar el producto en el inventario
                 $product = Product::find($prod['product_id']);
-            
+
                 // Actualizar el stock sumando la cantidad
                 $product->current_stock += $prod['amount'];
                 $product->save();
@@ -74,7 +74,7 @@ class PurchaseController extends Controller
                     'purchase_price' => $prod['purchase_price'],
                     'total' => $prod['amount'] * $prod['purchase_price'],
                 ]);
-            }   
+            }
 
             DB::commit();
             return redirect()->route('purchases.index')->with('success', 'Compra registrada exitosamente');
@@ -85,7 +85,7 @@ class PurchaseController extends Controller
             return Redirect::route('purchases.index')->with('error','Ocurrió un error inesperado: '.$e->getMessage());
         }
     }
-    
+
 
 
     /**
@@ -93,9 +93,17 @@ class PurchaseController extends Controller
      */
     public function show($id): View
     {
-        $purchase = Purchase::find($id);
+        /**
+         * Codigo anterior que estaba en show
+         *
+         *$purchase = Purchase::find($id);
 
+            * return view('purchase.show', compact('purchase'));
+         */
+
+         $purchase = Purchase::with('productPurchases.product')->findOrFail($id);
         return view('purchase.show', compact('purchase'));
+
     }
 
     /**
