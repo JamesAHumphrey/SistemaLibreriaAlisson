@@ -1,28 +1,38 @@
-@extends('layouts.app')
-
-@section('template_title')
-    {{ __('Create') }} Sale
-@endsection
+@extends('layouts.panel')
+@section('title', 'Sale/Create')
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Sale</span>
+    <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Registrar Venta</h3>
                     </div>
-                    <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('sales.store') }}"  role="form" enctype="multipart/form-data">
-                            @csrf
-
-                            @include('sale.form')
-
-                        </form>
+                    <div class="col-4 text-right">
+                        <a href="{{ route('sales.index') }}" class="btn btn-sm btn-primary"><i
+                                class="fas fa-arrow-left"></i>
+                            Volver</a>
                     </div>
                 </div>
             </div>
+            <div class="card-body container-fluid">
+                <h2>Registrar factura</h2>
+                <form action="{{ route('sales.store') }}" method="POST" onsubmit="prepareProducts(event)">
+                    @csrf
+                    @include('sale.form')
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <script>
+
+    function prepareProducts(event) {
+        event.preventDefault();
+        document.getElementById('products').value = JSON.stringify(prod);
+        event.target.submit();
+    }
+    </script>
+
 @endsection

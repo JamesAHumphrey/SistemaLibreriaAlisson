@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movement;
 use App\Models\Purchase;
+use App\Models\Sale;
 use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -54,6 +55,21 @@ class FunctionController extends Controller
     public static function generateCodeCompras(): string
     {
         $lastMovement = Purchase::orderBy('id', 'desc')->first();
+        $lastCode = $lastMovement ? $lastMovement->code : null;
+
+        if ($lastCode) {
+            $lastNumber = (int) str_replace('COM-', '', $lastCode);
+            $newNumber = $lastNumber + 1;
+        } else {
+            $newNumber = 1;
+        }
+
+        return 'COM-' . $newNumber;
+    }
+
+    public static function generateCodeVentas(): string
+    {
+        $lastMovement = Sale::orderBy('id', 'desc')->first();
         $lastCode = $lastMovement ? $lastMovement->code : null;
 
         if ($lastCode) {

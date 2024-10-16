@@ -1,89 +1,107 @@
-@extends('layouts.app')
-
-@section('template_title')
-    Sales
-@endsection
+@extends('layouts.panel')
+@section('title', 'Sale')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Sales') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('sales.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success m-4">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-									<th >Price</th>
-									<th >Amount</th>
-									<th >Customer Name</th>
-									<th >Customer Phone</th>
-									<th >Subtotal</th>
-									<th >Total</th>
-									<th >Discount</th>
-									<th >Invoice Number</th>
-									<th >Code</th>
-									<th >Employee Id</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($sales as $sale)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-										<td >{{ $sale->price }}</td>
-										<td >{{ $sale->amount }}</td>
-										<td >{{ $sale->customer_name }}</td>
-										<td >{{ $sale->customer_phone }}</td>
-										<td >{{ $sale->subtotal }}</td>
-										<td >{{ $sale->total }}</td>
-										<td >{{ $sale->discount }}</td>
-										<td >{{ $sale->invoice_number }}</td>
-										<td >{{ $sale->code }}</td>
-										<td >{{ $sale->employee_id }}</td>
-
-                                            <td>
-                                                <form action="{{ route('sales.destroy', $sale->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('sales.show', $sale->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('sales.edit', $sale->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">Ventas</h3>
+                        <a href="{{ route('sales.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Nueva Venta
+                        </a>
                     </div>
                 </div>
-                {!! $sales->withQueryString()->links() !!}
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col"><i class="fas fa-list-ol"></i> ID</th>
+                                <th scope="col"><i class="fas fa-heading"></i> Total</th>
+                                <th scope="col"><i class="fas fa-list-ol"></i> Fecha</th>
+                                <th scope="col"><i class="fas fa-list-ol"></i> Número de factura</th>                              
+                                <th scope="col"><i class="fas fa-list-ol"></i> Empleado</th> 
+                                <th scope="col"><i class="fas fa-calendar-check"></i> Fecha de Registro</th>
+                                <th scope="col"><i class="fas fa-cogs"></i> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($sales as $sale)
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-pill badge-primary"> {{ $sale->id }} </span>
+                                    </td>
+                                    <td>
+                                        {{ $sale->total }}
+                                    </td>
+
+                                    <td>
+                                        {{ $sale->date }}
+                                    </td>
+
+                                    <td>
+                                        {{ $sale->invoice_number }}
+                                    </td>
+                                                      
+                                    <td>
+                                        {{ $sale->employee->name }}
+                                    </td>
+
+                                    <td>
+                                        {{ $sale->created_at }}
+                                    </td>
+                                    <td style="white-space: nowrap; display: flex; align-items: center;">
+                                        <a href="{{ route('sales.show', $sale) }}" class="btn btn-primary btn-sm"
+                                            style="margin-right: 5px;">
+                                            <i class="fas fa-eye"></i> Mostrar
+                                        </a>
+                                        <a href="{{ route('sales.edit', $sale) }}" class="btn btn-info btn-sm"
+                                            style="margin-right: 5px;">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <form class="Form-Delete" action="{{ route('sales.destroy', $sale->id) }}" method="POST" style="display: inline-block; margin: 0; display: flex; align-items: center;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4">
+                    <nav aria-label="..." class="d-flex flex-wrap justify-content-center justify-content-lg-start">
+                        {{ $sales->links() }}
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        $('.Form-Delete').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'El registro será eliminado permanentemente',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#01499B',
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit()
+                }
+            })
+        })
+    </script>
 @endsection
+
