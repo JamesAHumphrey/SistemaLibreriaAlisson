@@ -52,7 +52,7 @@ class Sale extends Model
      */
     public function productSales()
     {
-        return $this->hasMany(\App\Models\ProductSale::class, 'id', 'sale_id');
+        return $this->hasMany(\App\Models\ProductSale::class, 'sale_id','id', );
     }
     
 }
