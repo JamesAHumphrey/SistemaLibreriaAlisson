@@ -28,7 +28,7 @@ class SaleRequest extends FormRequest
 			'customer_phone' => ['string', 'min:1','max:20'],
 			'subtotal' => ['required','numeric','min:0.01'],
 			'total' => ['required','numeric','min:0.01'],
-			'discount' => ['required','numeric'],
+			
 			'invoice_number' => ['required','string'],
             'code' => ['required','min:1','max:16', Rule::unique('sales')->ignore($this->route('sale'))],
         ];
