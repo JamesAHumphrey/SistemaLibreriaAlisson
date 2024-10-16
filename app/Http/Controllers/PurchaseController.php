@@ -101,7 +101,7 @@ class PurchaseController extends Controller
             * return view('purchase.show', compact('purchase'));
          */
 
-         $purchase = Purchase::with('productPurchases.product')->findOrFail($id);
+         $purchase = Purchase::with('provider','productPurchases.product')->findOrFail($id);
         return view('purchase.show', compact('purchase'));
 
     }
