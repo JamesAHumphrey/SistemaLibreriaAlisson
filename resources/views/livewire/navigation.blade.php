@@ -85,6 +85,13 @@
             </a>
         </li>
 
+        <li class="nav-item {{ Request::route()->named('sales.index') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::route()->named('sales.index') ? 'active' : '' }}"
+                href="{{ route('sales.index') }}" wire:navigate>
+                <i class="fas fa-box text-blue"></i> Ventas 
+            </a>
+        </li>
+
         <li class="nav-item {{ Request::route()->named('providers.index') ? 'active' : '' }}">
             <a class="nav-link {{ Request::route()->named('providers.index') ? 'active' : '' }}"
                 href="{{ route('providers.index') }}" wire:navigate>
