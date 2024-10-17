@@ -78,7 +78,7 @@ class SaleController extends Controller
             }   
 
             DB::commit();
-            return redirect()->route('sales.index')->with('success', 'Compra registrada exitosamente');
+            return redirect()->route('sales.index')->with('success', 'Venta registrada exitosamente');
 
         }
         catch(Exception $e){
